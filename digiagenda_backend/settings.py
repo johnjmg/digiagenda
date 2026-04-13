@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta # Import timedelta for token expiration settings
+import os
 from dotenv import load_dotenv # Importa load_dotenv para cargar variables de entorno
 load_dotenv() # Carga las variables de entorno desde el archivo .env
 
@@ -162,7 +163,7 @@ SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,
 }
 
-import os
+# import os
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
