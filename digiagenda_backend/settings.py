@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta # Import timedelta for token expiration settings
+from dotenv import load_dotenv # Importa load_dotenv para cargar variables de entorno
+load_dotenv() # Carga las variables de entorno desde el archivo .env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2jtnv0ji*stja1xovw-03n*w(iu#ce08h_&+-qr6s2e2g!+cv2'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", 'False') == 'True'  # Convierte a booleano
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(',') if os.getenv("ALLOWED_HOSTS") else []
 
 
 # Application definition
@@ -166,3 +168,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend'),  # apunta a tu carpeta frontend
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # para producción, donde se recolectarán los archivos estáticos
